@@ -107,7 +107,5 @@ The full code of the page implemented above is available at [https://github.com/
 
 If you have any other suggestions of how nxtk could make using Next.js and TypeScript more painless, create an issue! I hope to expand the scope of `nxtk` wherever pain points exist.
 
-<p>
 Created by [@vriad](https://twitter.com/vriad)<br>
 MIT License
-</p>
