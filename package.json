@@ -1,0 +1,56 @@
+{
+  "name": "nxtk",
+  "version": "0.0.1",
+  "description": "A project template for TypeScript npm packages",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vriad/nxtk"
+  },
+  "author": "Colin McDonnell <hi@vriad.com>",
+  "license": "MIT",
+  "sideEffects": false,
+  "bugs": {
+    "url": "https://github.com/vriad/nxtk/issues"
+  },
+  "homepage": "https://github.com/vriad/nxtk",
+  "dependencies": {},
+  "tags": [],
+  "keywords": [],
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/__tests__/*"
+  ],
+  "scripts": {
+    "clean": "rm -rf lib/*",
+    "build": "yarn run clean && tsc --p tsconfig.json",
+    "test": "jest --config jestconfig.json --coverage && yarn run badge",
+    "badge": "make-coverage-badge --output-path ./coverage.svg",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "@types/react": "^16.9.44",
+    "jest": "^25.1.0",
+    "make-coverage-badge": "^1.2.0",
+    "next": "^9.5.1",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "ts-jest": "^25.2.1",
+    "tslint": "^6.1.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "3.2"
+  },
+  "peerDependencies": {
+    "next": "^9.5.1"
+  }
+}
