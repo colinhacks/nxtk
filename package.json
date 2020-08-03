@@ -28,13 +28,6 @@
     "node_modules",
     "**/__tests__/*"
   ],
-  "scripts": {
-    "clean": "rm -rf lib/*",
-    "build": "yarn run clean && tsc --p tsconfig.json",
-    "test": "jest --config jestconfig.json --coverage && yarn run badge",
-    "badge": "make-coverage-badge --output-path ./coverage.svg",
-    "prepublishOnly": "npm run build"
-  },
   "devDependencies": {
     "@types/jest": "^25.1.4",
     "@types/react": "^16.9.44",
