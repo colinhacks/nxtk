@@ -1,11 +1,11 @@
 import { GetServerSidePropsContext, GetStaticPropsContext } from 'next';
 
 export namespace nxtk {
-  export type getServerSideProps<T> = (ctx: GetServerSidePropsContext) => Promise<{ props: T }>;
-  export const getServerSideProps = <T>(func: getServerSideProps<T>) => func;
+  type getServerSideProps<T> = (ctx: GetServerSidePropsContext) => Promise<{ props: T }>;
+  const getServerSideProps = <T>(func: getServerSideProps<T>) => func;
 
-  export type getStaticProps<T> = (ctx: GetStaticPropsContext) => Promise<{ props: T }>;
-  export const getStaticProps = <T>(func: getStaticProps<T>) => func;
+  type getStaticProps<T> = (ctx: GetStaticPropsContext) => Promise<{ props: T }>;
+  const getStaticProps = <T>(func: getStaticProps<T>) => func;
 
   export type getters<A, B> = Partial<{
     server: getServerSideProps<A>;
