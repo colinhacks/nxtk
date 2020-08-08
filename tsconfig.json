@@ -11,6 +11,7 @@
     "module": "commonjs",
     "declaration": true,
     // "moduleResolution": "node",
+    "skipLibCheck": true,
     "outDir": "./lib",
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
