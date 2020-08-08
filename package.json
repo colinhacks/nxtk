@@ -18,7 +18,8 @@
     "url": "https://github.com/vriad/nxtk/issues"
   },
   "scripts": {
-    "build": "tsc"
+    "clean": "rm -rf lib/*",
+    "build": "npm run clean && tsc"
   },
   "homepage": "https://github.com/vriad/nxtk",
   "dependencies": {},
