@@ -1,4 +1,4 @@
-import { GetServerSidePropsContext, GetStaticPropsContext } from 'next';
+import { GetServerSidePropsContext, GetStaticPropsContext, NextApiRequest, NextApiResponse } from 'next';
 
 export namespace nxtk {
   type getServerSideProps<T> = (ctx: GetServerSidePropsContext) => Promise<{ props: T }>;
@@ -7,10 +7,25 @@ export namespace nxtk {
   type getStaticProps<T> = (ctx: GetStaticPropsContext) => Promise<{ props: T }>;
   const getStaticProps = <T>(func: getStaticProps<T>) => func;
 
-  export type getters<A, B> = Partial<{
+  type getters<A, B> = Partial<{
     server: getServerSideProps<A>;
     static: getStaticProps<B>;
   }>;
+
+  type unwrapReturnedPromiseProps<T extends (...args: any[]) => Promise<{ props: any }>> = T extends (
+    ...args: any[]
+  ) => Promise<{ props: infer U }>
+    ? U
+    : {};
+
+  type identity<T> = T;
+  type flatten<T> = identity<{ [k in keyof T]: T[k] }>;
+  type props<
+    A extends (...args: any[]) => Promise<{ props: any }>,
+    B extends (...args: any[]) => Promise<{ props: any }> = () => Promise<{
+      props: {};
+    }>
+  > = flatten<unwrapReturnedPromiseProps<A> & unwrapReturnedPromiseProps<B>>;
 
   export const fetch = <C extends getters<any, any>>(args: C) => {
     return class NextConfig {
@@ -23,18 +38,6 @@ export namespace nxtk {
     };
   };
 
-  export type unwrapReturnedPromiseProps<T extends (...args: any[]) => Promise<{ props: any }>> = T extends (
-    ...args: any[]
-  ) => Promise<{ props: infer U }>
-    ? U
-    : {};
-
-  export type identity<T> = T;
-  export type flatten<T> = identity<{ [k in keyof T]: T[k] }>;
-  export type props<
-    A extends (...args: any[]) => Promise<{ props: any }>,
-    B extends (...args: any[]) => Promise<{ props: any }> = () => Promise<{
-      props: {};
-    }>
-  > = flatten<unwrapReturnedPromiseProps<A> & unwrapReturnedPromiseProps<B>>;
+  export type ApiRoute = (req: NextApiRequest, res: NextApiResponse) => void;
+  export const api = (route: ApiRoute) => route;
 }
