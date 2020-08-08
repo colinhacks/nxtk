@@ -25,7 +25,7 @@ import { nxtk } from 'nxtk';
 
 ## `nxtk.fetch`
 
-Currently `nxtk` contains just a single utility: `fetch`. This utility uses type inference to reduce the boilerplate associated with writing Next.js pages in TypeScript.
+This utility reduces the boilerplate required to implement pages with data fetching. It uses type inference to detect the return type of `getStaticProps`, `getServerSideProps`, or both. Then it merges the types so you can trivially add strong typing to your component props.
 
 ### Defining fetch functions
 
@@ -118,6 +118,20 @@ This may not look like much with a simple example, but imagine you are doing a s
 ### Full example
 
 A full sample page is available at [https://github.com/vriad/nxtk/blob/master/src/example.tsx](https://github.com/vriad/nxtk/blob/master/src/example.tsx).
+
+## `nxtk.api`
+
+This is a helper function for defining API routes.
+
+```tsx
+// /api/hello.ts
+import { nxtk } from 'nxtk';
+
+export default nxtk.api((req, res) => {
+  if (req.method !== 'POST') return res.status(200).json({ name: 'unsupported' });
+  res.status(200).json({ message: 'yay post!' });
+});
+```
 
 ## `nxtk.???`
 
